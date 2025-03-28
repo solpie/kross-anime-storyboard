@@ -12,7 +12,8 @@ export function SnapshotToolbar() {
   const save = useCallback(async () => {
     setIsSaving(true)
     try {
-      const { document, session } = getSnapshot(editor.store)
+        const { document, session } = getSnapshot(editor.store)
+        console.log('document :>> ', document);
       const response = await fetch('/api/save', {
         method: 'POST',
         headers: {
@@ -114,20 +115,6 @@ export function SnapshotToolbar() {
       >
         {isLoading ? 'Loading...' : 'Load Snapshot'}
       </button>
-    </div>
-  )
-}
-
-export default function SnapshotExample() {
-  return (
-    <div className="tldraw__editor" style={{ position: 'fixed', inset: 0 }}>
-      <Tldraw
-        components={{
-          SharePanel: SnapshotToolbar,
-        }}
-      >
-        <SnapshotToolbar />
-      </Tldraw>
     </div>
   )
 }
